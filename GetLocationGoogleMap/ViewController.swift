@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
-
+    
+    var customView: View?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        customView = View(frame: self.view.frame)
+        self.view.addSubview(customView!)
+        customView?.currentLocationButton.addTarget(self, action: #selector(self.pushCurrentButton(_:)), forControlEvents: .TouchUpInside)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func pushCurrentButton(sender: UIButton) {
+        let location = CurrentLocation()
+        location.lm.delegate = location
     }
-
-
 }
 
